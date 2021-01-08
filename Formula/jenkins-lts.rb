@@ -12,10 +12,9 @@ class JenkinsLts < Formula
 
   bottle :unneeded
 
-  depends_on "openjdk@11"
 
   def install
-    system "#{Formula["openjdk@11"].opt_bin}/jar", "xvf", "jenkins.war"
+    system "jar", "xvf", "jenkins.war"
     libexec.install "jenkins.war", "WEB-INF/lib/cli-#{version}.jar"
     bin.write_jar_script libexec/"jenkins.war", "jenkins-lts", java_version: "11"
     bin.write_jar_script libexec/"cli-#{version}.jar", "jenkins-lts-cli", java_version: "11"
@@ -39,7 +38,7 @@ class JenkinsLts < Formula
           <string>#{plist_name}</string>
           <key>ProgramArguments</key>
           <array>
-            <string>#{Formula["openjdk@11"].opt_bin}/java</string>
+            <string>java</string>
             <string>-Dmail.smtp.starttls.enable=true</string>
             <string>-jar</string>
             <string>#{opt_libexec}/jenkins.war</string>
